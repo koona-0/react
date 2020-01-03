@@ -10,7 +10,18 @@ class TOC extends Component{
       while(i < data.length){
         //키 안주면 인터넷 콘솔 창에서 키달라는 오류가 뜨게 됨
         //여러개의 목록을 자동으로 생성할 때에는 각각의 목록을 다른 것들과 구별할 식별자 key를 줘야함
-        lists.push(<li key={data[i].id}><a href={"/content/"+data[i].id}>{data[i].title}</a></li>)
+        lists.push(
+          <li key={data[i].id}>
+            <a 
+              href={"/content/"+data[i].id}
+              data-id={data[i].id}
+              onClick={function(e){
+                e.preventDefault();
+                this.props.onChangePage(e.target.dataset.id);
+                //타겟은 이 a태그를 가리킴
+              }.bind(this)}
+              >{data[i].title}</a>
+          </li>)
         i = i + 1;
       }
 
