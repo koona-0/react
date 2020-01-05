@@ -11,11 +11,9 @@ import './App.css';
 class App extends Component{
   constructor(props){
     super(props);
-    //contents개수를 state로 하지 않고 객체로 한 이유
-    //객체로 하면 데이터를 push할때 UI에 영향줄 이유 없음, 하면 불필요한 렌더링 발생
     this.max_content_id = 3;
     this.state = {
-      mode:'create',
+      mode:'welcome',
       selected_content_id:2,
       subject:{title:'WEB', sub:'world wide web!'},
       welcome:{title:'Welcome', desc:'Hello, React!'},
@@ -27,51 +25,86 @@ class App extends Component{
     }
   }
 
-  render(){
-    console.log('App render');
-    var _title, _desc, _article= null;
-    if(this.state.mode === 'welcome'){ //이것도 원본을 교체한 것으로 볼 수 있음
-      _title = this.state.welcome.title;
-      _desc = this.state.welcome.desc;
-      _article = <ReadContent title={_title} desc={_desc}></ReadContent>
-    }else if(this.state.mode === 'read'){
-      var i = 0;
+  getReadContent(){
+    var i = 0;
       while(i < this.state.contents.length){
         var data = this.state.contents[i];
         if(data.id === this.state.selected_content_id){
-          _title = data.title;
-          _desc = data.desc;
-          break;
+          // _title = data.title;
+          // _desc = data.desc;
+          return data;
         }
         i = i + 1;
       }
+  }
+
+  getContent(){
+    var _title, _desc, _article= null;
+
+    if(this.state.mode === 'welcome'){
+      _title = this.state.welcome.title;
+      _desc = this.state.welcome.desc;
       _article = <ReadContent title={_title} desc={_desc}></ReadContent>
-    } else if(this.state.mode === 'create'){
+    }
+    
+    else if(this.state.mode === 'read'){
+      // var i = 0;
+      // while(i < this.state.contents.length){
+      //   var data = this.state.contents[i];
+      //   if(data.id === this.state.selected_content_id){
+      //     _title = data.title;
+      //     _desc = data.desc;
+      //     break;
+      //   }
+      //   i = i + 1;
+      // }
+
+      var _content = this.getReadContent();
+      _article = <ReadContent title={_content.title} desc={_content.desc}></ReadContent>
+    } 
+    
+    else if(this.state.mode === 'create'){
       _article = <CreateContent onSubmit={function(_title, _desc){
         this.max_content_id = this.max_content_id + 1;
-        //push 사용
-        // this.state.contents.push( //이렇게 하면 리액트가 모름... 몰래바꾸기임
-        //   {id:this.max_content_id, title:_title, desc:_desc}
-        // )
-        //객체를 바꾸고 싶을 때 array.asign
-        //배열을 바꾸고 싶을 때 array.from
-        var _contents = this.state.contents.concat(
-          {id:this.max_content_id, title:_title, desc:_desc}
-        )
-
-        this.setState({ //이렇게 추가
-          // contents:this.state.contents //push 사용할 때
-          contents:_contents
+        var _contents = Array.from(this.state.contents);  //concat과 같은 효과
+        _contents.push({id:this.max_content_id, title:_title, desc:_desc})
+        this.setState({ 
+          contents:_contents,
+          mode:'read',
+          selected_content_id:this.max_content_id
         });
         console.log(_title, _desc);
 
       }.bind(this)}></CreateContent>
     }
-    //push로 추가하는 방법은 사실 좋은 방법이 아님. 나중에 성능개선 까다로움
-    //push가 아닌 concat 이용하기
-    //push는 원본을 바꾼다
-    //concat은 원본을 바꾸지 않는다. 오리지널 데이터 변경이 아닌 새로운 데이터 추가
 
+    else if(this.state.mode === 'update'){
+      _content = this.getReadContent();
+      _article = <UpdateContent data={_content} onSubmit={
+        function(_id,_title, _desc){
+          var _contents = Array.from(this.state.contents); //자바스크립트의 기능 원본을 복사한 새로운 배열 생성
+          //불변함. 원본을 바꾸지 않는 테크닉. 나중에 성능을 튜닝할 때 필요
+          var i = 0;
+          while(i < _contents.length){
+            if(_contents[i].id === _id){
+              _contents[i] = {id:_id, title:_title, desc:_desc}
+              break;
+            }
+            i = i + 1;
+          }
+          this.setState({ 
+            contents:_contents,
+            mode:'read'
+          });
+        console.log(_title, _desc);
+
+      }.bind(this)}></UpdateContent>
+    }
+    return _article;
+  }
+
+  render(){
+    console.log('App render');
 
     return (
       <div className="App">
@@ -87,21 +120,27 @@ class App extends Component{
         <TOC onChangePage={function(id){
           this.setState({
             mode:'read',
-            selected_content_id:Number(id) //문자를 숫자로 바꿔주는 자바스크립트 함수 Number
+            selected_content_id:Number(id) 
           });
         }.bind(this)} 
         data={this.state.contents}>
         </TOC>
 
-{/* 이벤트가 실행됐을때 실행 되어야하는 함수 : 핸들러 */}
         <Control onChangeMode={function(_mode){
+          if(_mode === 'delete'){
+
+          }
+          else{
+            this.setState({
+              mode:_mode
+            })
+          }
           this.setState({
             mode:_mode
           })
         }.bind(this)}></Control>
-
-
-        {_article}
+        
+        {this.getContent()}
         
       </div>
     );
