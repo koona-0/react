@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import TOC from "./components/TOC"
 import ReadContent from "./components/ReadContent"
 import CreateContent from "./components/CreateContent"
+import UpdateContent from "./components/UpdateContent"
 import Subject from "./components/Subject"
 import Control from "./components/Control"
 import './App.css';
