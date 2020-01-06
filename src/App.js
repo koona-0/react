@@ -128,20 +128,33 @@ class App extends Component{
 
         <Control onChangeMode={function(_mode){
           if(_mode === 'delete'){
-
+            if(window.confirm('삭제하시겠습니까?')){
+              //누구를 삭제할 것인가
+              var _contents = Array.from(this.state.contents);
+              var i = 0;
+              while(i < _contents.length){
+                if(_contents[i].id === this.state.selected_content_id){
+                  _contents.splice(i,1);  
+                  //splice : 어디서부터 어디까지 지울것인가 지정
+                  //_contents의 원본을 바꾸게 됨
+                  break;
+                }
+                i = i + 1;
+              }
+              this.setState({
+                mode:'welcome',
+                contents:_contents
+              });
+              alert('삭제되었습니다!');
+            }
           }
           else{
             this.setState({
               mode:_mode
             })
           }
-          this.setState({
-            mode:_mode
-          })
         }.bind(this)}></Control>
-        
         {this.getContent()}
-        
       </div>
     );
   }
