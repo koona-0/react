@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import '../Control.css'
 
 class UpdateContent extends Component{
   

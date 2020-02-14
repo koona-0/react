@@ -6,7 +6,8 @@ import CreateContent from "./components/CreateContent"
 import UpdateContent from "./components/UpdateContent"
 import Subject from "./components/Subject"
 import Control from "./components/Control"
-import './App.css';
+import './Control.css'
+
 
 class App extends Component{
   constructor(props){
@@ -48,17 +49,6 @@ class App extends Component{
     }
     
     else if(this.state.mode === 'read'){
-      // var i = 0;
-      // while(i < this.state.contents.length){
-      //   var data = this.state.contents[i];
-      //   if(data.id === this.state.selected_content_id){
-      //     _title = data.title;
-      //     _desc = data.desc;
-      //     break;
-      //   }
-      //   i = i + 1;
-      // }
-
       var _content = this.getReadContent();
       _article = <ReadContent title={_content.title} desc={_content.desc}></ReadContent>
     } 

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import '../Control.css'
 
 class TOC extends Component{
   //현재 보여지고 있는 목록인데 다시 클릭하면 쓸데없이 렌더링됨
@@ -52,9 +53,6 @@ class TOC extends Component{
       return(
         <nav>
               <ul>
-                  {/* <li><a href="1.html">HTML</a></li>
-                  <li><a href="2.css">CSS</a></li>
-                  <li><a href="3.javascript">JavaScript</a></li> */}
                   {lists}
               </ul>
           </nav>

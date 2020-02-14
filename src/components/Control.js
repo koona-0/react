@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+import '../Control.css'
 
 class Control extends Component{
     render(){
       console.log('Control render');
       return (
+      
         <ul> 
           <li><a href="/create" onClick={function(e){
             e.preventDefault();
