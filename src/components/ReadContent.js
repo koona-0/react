@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../Control.css'
+import '../css/first.css'
 
 class ReadContent extends Component{
   render(){

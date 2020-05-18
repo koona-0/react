@@ -6,7 +6,7 @@ import CreateContent from "./components/CreateContent"
 import UpdateContent from "./components/UpdateContent"
 import Subject from "./components/Subject"
 import Control from "./components/Control"
-import './Control.css'
+import './css/first.css'
 
 
 class App extends Component{

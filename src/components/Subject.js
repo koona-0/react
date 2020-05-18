@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import '../Control.css'
+import '../css/first.css'
+
 class Subject extends Component{
     render(){
       console.log('Subject render');

@@ -1,26 +1,25 @@
 import React, {Component} from 'react';
-import '../Control.css'
+import '../css/first.css'
 
 class Control extends Component{
     render(){
       console.log('Control render');
       return (
-      
-        <ul> 
-          <li><a href="/create" onClick={function(e){
+        <ul id="btn_container"> 
+          <li><a class="button" href="/create" onClick={function(e){
             e.preventDefault();
             this.props.onChangeMode('create');
           }.bind(this)}>create</a></li>
 
-          <li><a href="/update" onClick={function(e){
+          <li><a class="button" href="/update" onClick={function(e){
             e.preventDefault();
             this.props.onChangeMode('update');
           }.bind(this)}>update</a></li>
 
-          <li><input onClick={function(e){
+          <li id="del"><input onClick={function(e){
             e.preventDefault();
             this.props.onChangeMode('delete');
-          }.bind(this)} type="button" value="delete"></input></li>
+          }.bind(this)} class="button" type="button" value="delete"></input></li>
         </ul>
       );
     }

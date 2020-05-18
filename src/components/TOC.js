@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../Control.css'
+import '../css/first.css'
 
 class TOC extends Component{
   //현재 보여지고 있는 목록인데 다시 클릭하면 쓸데없이 렌더링됨

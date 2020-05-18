@@ -1,0 +1,87 @@
+body{
+    text-align: center;
+    
+}
+
+h1{
+    text-align: center;
+}
+h1 a{
+    color:black;
+    text-align: center;
+    text-decoration: none;
+}
+
+ul{
+    background-color: lightgray;
+    height: 50px;
+    list-style-type: none;  /*목록 기호 제거*/
+
+    display: flex; /*아이템 가로 정렬*/
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content:center;
+    justify-content: center;
+}
+li{
+    padding:5px;
+}
+li a{
+    text-align: center;
+    color:black;
+    text-decoration: none;  /*밑줄 제거*/
+}
+li a:hover{
+    color:lightcoral;                                                     ;
+    font-size: 20px;
+    display: inline-block;
+    transition-property:transform all;
+    transition-duration: 0.3s;
+}
+#btn_container{
+    background-color: #fff;
+}
+
+.button{
+    display: inline-block;
+    background-color: #fff;
+    color:gray;
+    font-size: 15px;
+    border-radius: 5px;
+    outline: lightgray;
+    border: 2px solid lightgray;
+    padding: 5px;
+    margin: 0px;
+    height:25px;
+
+    display: flex; /*아이템 가로 정렬*/
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content:stretch;
+    justify-content: center;
+
+    -webkit-transition-duration: 0.4s; /* 버튼 호버 */
+    transition-duration: 0.4s;
+}
+.button:hover {
+    background: lightcoral; 
+    color: white;
+    font-size: 15px;
+    border: 0px;
+    padding: 5px;
+    margin:5px;
+    height:25px;
+}
+#del>input{
+    height : 39px;    
+}
+#submit_btn{
+    background-color: #fff;
+    color:gray;
+    font-size: 15px;
+    border-radius: 5px;
+    border: 2px solid lightgray;
+    
+    height:40px;
+    width: 60PX;
+}

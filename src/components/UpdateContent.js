@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import '../Control.css'
+import '../css/first.css'
 
 class UpdateContent extends Component{
   
@@ -54,7 +54,7 @@ class UpdateContent extends Component{
                 value={this.state.desc}
                 onChange={this.inputFormHandler}></textarea>
               </p>
-              <p><input type="submit"></input></p>
+              <p><input id="submit_btn" type="submit"></input></p>
             </form>
         </article>
     );
